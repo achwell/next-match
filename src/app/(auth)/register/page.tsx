@@ -1,7 +1,8 @@
+import RegisterForm from "@/app/(auth)/register/RegisterForm";
 
 const RegisterPage = () => {
-    return <div>
-        <h3 className="text-3xl">This will be the register page</h3>
+    return <div className='flex items-center justify-center vertical-center'>
+        <RegisterForm/>
     </div>
 }
 export default RegisterPage;
