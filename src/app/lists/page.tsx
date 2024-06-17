@@ -1,7 +1,13 @@
+import ListsTab from "@/app/lists/ListsTab";
+import {fetchCurrentUserLikeIds, fetchLikedMembers} from "@/app/actions/likeActions";
 
-const ListsPage = () => {
+const ListsPage = async ({searchParams}: {searchParams: {type: string}}) => {
+
+    const likeIds = await fetchCurrentUserLikeIds();
+    const members = await fetchLikedMembers(searchParams.type);
+
     return <div>
-        <h3 className="text-3xl">This will be the lists page</h3>
+        <ListsTab members={members} likeIds={likeIds}/>
     </div>
 }
 export default ListsPage;
