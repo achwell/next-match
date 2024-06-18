@@ -5,12 +5,13 @@ import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownSection, Dropdown
 import { Session } from 'next-auth'
 import Link from 'next/link'
 import React from 'react'
+import {transformImageUrl} from "@/lib/util";
 
 type Props = {
-    user: Session['user']
+    userInfo: {name: string | null; image: string | null;} | null
 }
 
-const UserMenu = ({user}: Props) => (
+const UserMenu = ({userInfo}: Props) => (
     <Dropdown placement='bottom-end'>
         <DropdownTrigger>
             <Avatar
@@ -18,15 +19,15 @@ const UserMenu = ({user}: Props) => (
                 as='button'
                 className='transition-transform'
                 color='secondary'
-                name={user?.name || 'user avatar'}
+                name={userInfo?.name || 'user avatar'}
                 size='sm'
-                src={user?.image || '/images/user.png'}
+                src={transformImageUrl(userInfo?.image) || '/images/user.png'}
             />
         </DropdownTrigger>
         <DropdownMenu variant='flat' aria-label='User actions menu'>
             <DropdownSection showDivider>
                 <DropdownItem isReadOnly as='span' className='h-14 flex flex-row' aria-label='username'>
-                    Signed in as {user?.name}
+                    Signed in as {userInfo?.name}
                 </DropdownItem>
             </DropdownSection>
             <DropdownItem as={Link} href='/members/edit'>

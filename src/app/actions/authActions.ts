@@ -4,10 +4,11 @@ import {prisma} from "@/lib/prisma";
 import {auth, signIn, signOut} from "@/auth";
 import {registerSchema, RegisterSchema} from "@/lib/schemas/registerSchema";
 import {ActionResult} from "@/types";
-import {User} from "@prisma/client";
+import {Prisma, User} from "@prisma/client";
 import bcrypt from 'bcryptjs';
 import {AuthError} from "next-auth";
 import {LoginSchema} from "@/lib/schemas/loginSchema";
+import MemberCreateInput = Prisma.MemberCreateInput;
 
 export async function signInUser(data: LoginSchema): Promise<ActionResult<string>> {
     try {
@@ -18,7 +19,11 @@ export async function signInUser(data: LoginSchema): Promise<ActionResult<string
         });
         return {status: 'success', data: 'Logged in'}
     } catch (error) {
+
+        console.log({error})
+
         if (error instanceof AuthError) {
+            console.log(error.type)
             switch (error.type) {
                 case 'CredentialsSignin':
                     return {status: 'error', error: 'Invalid credentials'}
@@ -56,9 +61,24 @@ export async function registerUser(data: RegisterSchema): Promise<ActionResult<U
             data: {
                 name,
                 email,
-                passwordHash: hashedPassword
+                passwordHash: hashedPassword,
+                emailVerified: new Date()
             }
         })
+        const member: MemberCreateInput = {
+            city: "unknown",
+            country: "unknown",
+            dateOfBirth: new Date(),
+            description: "unknown",
+            gender: "unknown",
+            name,
+            user: {connect: {id: user.id}}}
+        const newMember = await prisma.member.create({
+            data: member
+        });
+
+        console.log({user, member, newMember})
+
         return {status: 'success', data: user}
     } catch (error) {
         console.log(error);

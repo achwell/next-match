@@ -6,7 +6,7 @@ import {Card} from "@nextui-org/card";
 import Link from "next/link";
 import {CardFooter} from "@nextui-org/react";
 import {Image} from "@nextui-org/image";
-import {calculateAge} from "@/lib/util";
+import {calculateAge, transformImageUrl} from "@/lib/util";
 
 type Props = {
     member: Member
@@ -31,7 +31,7 @@ const MemberCard = ({member, likeIds}: Props) => {
                 isZoomed
                 alt={member.name}
                 width={300}
-                src={member.image || '/images/user.png'}
+                src={transformImageUrl(member.image) || '/images/user.png'}
                 className='aspect-square object-cover'
             />
             <div onClick={preventLinkAction}>

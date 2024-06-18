@@ -8,6 +8,7 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {registerSchema, RegisterSchema} from "@/lib/schemas/registerSchema";
 import {toast} from "react-toastify";
+import {handleFormServerErrors} from "@/lib/util";
 
 const RegisterForm = () => {
 
@@ -19,16 +20,9 @@ const RegisterForm = () => {
     const onSubmit = async (data: RegisterSchema) => {
         const result = await registerUser(data);
         if (result.status === 'success') {
-            toast.error('User registered successfully');
+            toast.info('User registered successfully');
         } else {
-            if (Array.isArray(result.error)) {
-                result.error.forEach((e) => {
-                    const fieldName = e.path.join('.') as 'email' | 'name' | 'password';
-                    setError(fieldName, {message: e.message})
-                })
-            } else {
-                setError('root.serverError', {message: result.error});
-            }
+            handleFormServerErrors(result, setError);
         }
     }
 
