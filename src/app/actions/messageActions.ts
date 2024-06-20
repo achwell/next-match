@@ -36,21 +36,39 @@ export async function getMessageThread(recipientId: string) {
 
         const messages = await prisma.message.findMany({
             where: {
-                OR: [{
-                    senderId: userId, recipientId, senderDeleted: false
-                }, {
-                    senderId: recipientId, recipientId: userId, recipientDeleted: false
-                }]
-            }, orderBy: {
-                created: 'asc'
-            }, select: {
-                id: true, text: true, created: true, dateRead: true, sender: {
-                    select: {
-                        userId: true, name: true, image: true
+                OR: [
+                    {
+                        senderId: userId,
+                        recipientId,
+                        senderDeleted: false
+                    },
+                    {
+                        senderId: recipientId,
+                        recipientId: userId,
+                        recipientDeleted: false
                     }
-                }, recipient: {
+                ]
+            },
+            orderBy: {
+                created: 'asc'
+            },
+            select: {
+                id: true,
+                text: true,
+                created: true,
+                dateRead: true,
+                sender: {
                     select: {
-                        userId: true, name: true, image: true
+                        userId: true,
+                        name: true,
+                        image: true
+                    }
+                },
+                recipient: {
+                    select: {
+                        userId: true,
+                        name: true,
+                        image: true
                     }
                 }
             }
@@ -59,8 +77,11 @@ export async function getMessageThread(recipientId: string) {
         if (messages.length > 0) {
             await prisma.message.updateMany({
                 where: {
-                    senderId: recipientId, recipientId: userId, dateRead: null
-                }, data: {dateRead: new Date()}
+                    senderId: recipientId,
+                    recipientId: userId,
+                    dateRead: null
+                },
+                data: {dateRead: new Date()}
             })
         }
 
@@ -76,20 +97,32 @@ export async function getMessagesByContainer(container: string) {
         const userId = await getAuthUserId();
 
         const conditions = {
-            [container === 'outbox' ? 'senderId' : 'recipientId']: userId, ...(container === 'outbox' ? {senderDeleted: false} : {recipientDeleted: false})
+            [container === 'outbox' ? 'senderId' : 'recipientId']: userId,
+            ...(container === 'outbox' ? {senderDeleted: false} : {recipientDeleted: false})
         }
 
         const messages = await prisma.message.findMany({
-            where: conditions, orderBy: {
+            where: conditions,
+            orderBy: {
                 created: 'desc'
-            }, select: {
-                id: true, text: true, created: true, dateRead: true, sender: {
+            },
+            select: {
+                id: true,
+                text: true,
+                created: true,
+                dateRead: true,
+                sender: {
                     select: {
-                        userId: true, name: true, image: true
+                        userId: true,
+                        name: true,
+                        image: true
                     }
-                }, recipient: {
+                },
+                recipient: {
                     select: {
-                        userId: true, name: true, image: true
+                        userId: true,
+                        name: true,
+                        image: true
                     }
                 }
             }

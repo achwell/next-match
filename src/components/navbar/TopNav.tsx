@@ -1,4 +1,4 @@
-import {Button, Navbar, NavbarBrand, NavbarContent, NavbarItem} from "@nextui-org/react";
+import {Button, Navbar, NavbarBrand, NavbarContent} from "@nextui-org/react";
 import {GiMatchTip} from "react-icons/gi";
 import Link from "next/link";
 import NavLink from "@/components/navbar/NavLink";

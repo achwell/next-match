@@ -1,10 +1,10 @@
 'use client';
 
+import {useEffect} from "react";
 import {useParams, useRouter} from "next/navigation";
 import {useForm} from "react-hook-form";
 import {messageSchema, MessageSchema} from "@/lib/schemas/messageSchema";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useEffect} from "react";
 import {handleFormServerErrors} from "@/lib/util";
 import {createMessage} from "@/app/actions/messageActions";
 import {Button, Input} from "@nextui-org/react";
@@ -32,7 +32,6 @@ const ChatForm = () => {
             setTimeout(() => setFocus('text'), 50);
         }
     }
-
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='w-full'>

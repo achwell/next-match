@@ -2,10 +2,8 @@
 
 import LikeButton from '@/components/LikeButton'
 import {Member} from "@prisma/client";
-import {Card} from "@nextui-org/card";
+import { Card, CardFooter, Image } from "@nextui-org/react";
 import Link from "next/link";
-import {CardFooter} from "@nextui-org/react";
-import {Image} from "@nextui-org/image";
 import {calculateAge, transformImageUrl} from "@/lib/util";
 
 type Props = {

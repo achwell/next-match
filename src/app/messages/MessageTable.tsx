@@ -1,13 +1,12 @@
 'use client';
 
+import { Key, useCallback, useState } from "react";
 import {MessageDto} from "@/types";
-import {Card} from "@nextui-org/card";
-import {useRouter, useSearchParams} from "next/navigation";
-import {Key, useCallback, useState} from "react";
+import { Avatar, Button, Card, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { AiFillDelete } from "react-icons/ai";
 import {deleteMessage} from "@/app/actions/messageActions";
-import {Avatar, Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
-import {AiFillDelete} from "react-icons/ai";
-import { truncateString } from '@/lib/util';
+import { truncateString } from "@/lib/util";
 
 type Props = {
     messages: MessageDto[];

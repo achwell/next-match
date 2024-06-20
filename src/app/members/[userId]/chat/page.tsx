@@ -1,4 +1,3 @@
-import React from 'react'
 import CardInnerWrapper from "@/components/CardInnerWrapper";
 import {getAuthUserId} from "@/app/actions/authActions";
 import { getMessageThread } from '@/app/actions/messageActions'
@@ -8,8 +7,6 @@ import ChatForm from './ChatForm'
 const ChatPage = async ({params}: {params: {userId: string}}) => {
     const userId = await getAuthUserId();
     const messages = await getMessageThread(params.userId);
-
-    console.log({userId, messages})
 
     const body = (
         <div>

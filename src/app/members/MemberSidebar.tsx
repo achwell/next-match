@@ -5,7 +5,6 @@ import { Button, Card, CardBody, CardFooter, Divider, Image } from '@nextui-org/
 import { Member } from '@prisma/client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React from 'react'
 
 type Props = {
     member: Member

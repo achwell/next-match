@@ -19,11 +19,8 @@ export async function signInUser(data: LoginSchema): Promise<ActionResult<string
         });
         return {status: 'success', data: 'Logged in'}
     } catch (error) {
-
-        console.log({error})
-
+        console.log(error);
         if (error instanceof AuthError) {
-            console.log(error.type)
             switch (error.type) {
                 case 'CredentialsSignin':
                     return {status: 'error', error: 'Invalid credentials'}
@@ -90,6 +87,7 @@ export async function registerUser(data: RegisterSchema): Promise<ActionResult<U
 export async function getUserByEmail(email: string) {
     return prisma.user.findUnique({where: {email}});
 }
+
 export async function getUserById(id: string) {
     return prisma.user.findUnique({where: {id}});
 }

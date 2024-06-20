@@ -1,6 +1,5 @@
-import {CardBody, CardHeader} from "@nextui-org/card";
-import {ReactNode} from "react";
-import {CardFooter} from "@nextui-org/react";
+import React, { ReactNode } from "react"
+import { CardHeader, Divider, CardBody, CardFooter } from "@nextui-org/react"
 
 interface Props {
     header: ReactNode | string
@@ -14,6 +13,7 @@ const CardInnerWrapper = ({header, body, footer}: Props) => {
                 {typeof header === "string" ?
                     <div className="text-2xl font-semibold text-secondary">{header}</div> : <>{header}</>}
             </CardHeader>
+            <Divider />
             <CardBody>
                 {body}
             </CardBody>

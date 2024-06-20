@@ -1,20 +1,19 @@
 'use client';
 
-import { registerUser } from '@/app/actions/authActions';
-import {Card, CardBody, CardHeader} from "@nextui-org/card";
-import {GiPadlock} from "react-icons/gi";
-import {Button, Input} from "@nextui-org/react";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {registerSchema, RegisterSchema} from "@/lib/schemas/registerSchema";
+import { registerUser } from "@/app/actions/authActions";
+import { Button, Card, CardHeader, CardBody, Input } from "@nextui-org/react";
+import { GiPadlock } from "react-icons/gi";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterSchema, registerSchema } from "@/lib/schemas/registerSchema";
 import {toast} from "react-toastify";
-import {handleFormServerErrors} from "@/lib/util";
+import { handleFormServerErrors } from "@/lib/util";
 
 const RegisterForm = () => {
 
     const {register, handleSubmit, formState: {errors, isValid, isSubmitting}, setError} = useForm<RegisterSchema>({
         resolver: zodResolver(registerSchema),
-        mode: 'onTouched'
+        mode: "onTouched"
     });
 
     const onSubmit = async (data: RegisterSchema) => {

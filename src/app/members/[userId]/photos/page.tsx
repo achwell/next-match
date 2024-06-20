@@ -1,6 +1,5 @@
 import {getMemberPhotosByUserId} from '@/app/actions/memberActions'
 import {Image} from '@nextui-org/react'
-import React from 'react'
 import CardInnerWrapper from "@/components/CardInnerWrapper";
 
 const PhotosPage = async ({params}: { params: { userId: string } }) => {
