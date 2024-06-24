@@ -74,8 +74,6 @@ export async function registerUser(data: RegisterSchema): Promise<ActionResult<U
             data: member
         });
 
-        console.log({user, member, newMember})
-
         return {status: 'success', data: user}
     } catch (error) {
         console.log(error);
