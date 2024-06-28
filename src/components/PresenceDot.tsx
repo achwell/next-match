@@ -14,8 +14,6 @@ const PresenceDot = ({ member }: Props) => {
 
     const isOnline = members.indexOf(member.userId) !== -1;
 
-    console.log({ members, isOnline });
-
     if (!isOnline) return null;
 
     return (
