@@ -1,11 +1,11 @@
 "use client"
 
-import {Button, Select, SelectItem, Slider, Spinner} from "@nextui-org/react";
+import {Button, Select, SelectItem, Slider, Spinner, Switch} from "@nextui-org/react";
 import {useFilters} from "@/hooks/useFilters";
 
 const Filters = () => {
 
-    const {clientLoaded, filters, genderList, isPending, orderByList, selectAge, selectGender, selectOrder, totalCount} = useFilters()
+    const {clientLoaded, filters, genderList, isPending, orderByList, selectAge, selectGender, selectOrder, selectWithPhoto, totalCount} = useFilters()
 
     return (<div className="shaddow-md5 py-2">
         <div className="flex flex-row justify-around items-center">
@@ -39,6 +39,15 @@ const Filters = () => {
                     defaultValue={filters.ageRange}
                     onChangeEnd={(value) => selectAge(value as number[])}
                     aria-label="Age range slider"
+                />
+            </div>
+            <div className='flex flex-col items-center'>
+                <p className='text-sm'>With photo</p>
+                <Switch
+                    color='secondary'
+                    defaultSelected
+                    size="sm"
+                    onChange={selectWithPhoto}
                 />
             </div>
             <div className="w-1/4">

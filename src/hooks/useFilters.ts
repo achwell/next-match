@@ -1,8 +1,8 @@
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {useEffect, useState, useTransition} from "react";
+import {ChangeEvent, useEffect, useState, useTransition} from "react";
 import {FaFemale, FaMale} from "react-icons/fa";
 import {Selection} from "@nextui-org/react";
-import useFilterStore from "@/hooks/userFilterStore";
+import useFilterStore from "@/hooks/useFilterStore";
 import usePaginationStore from "@/hooks/usePaginationStore";
 
 export const useFilters = () => {
@@ -41,10 +41,11 @@ export const useFilters = () => {
             if (orderBy) searchParams.set('orderBy', orderBy);
             if (pageSize) searchParams.set('pageSize', pageSize.toString());
             if (pageNumber) searchParams.set('pageNumber', pageNumber.toString());
+            searchParams.set('withPhoto', withPhoto.toString());
 
             router.replace(`${pathname}?${searchParams}`)
         })
-    }, [gender, ageRange, orderBy, router, pathname, pageSize, pageNumber]);
+    }, [gender, ageRange, orderBy, router, pathname, pageSize, pageNumber, withPhoto]);
 
     const orderByList = [{label: "Last Active", value: "updated"}, {label: "Newest members", value: "created"}]
     const genderList = [{value: "male", icon: FaMale}, {value: "female", icon: FaFemale}]
@@ -67,6 +68,10 @@ export const useFilters = () => {
         }
     }
 
+    const handleWithPhotoToggle = (e: ChangeEvent<HTMLInputElement>) => {
+        setFilters('withPhoto', e.target.checked);
+    }
+
     return {
         clientLoaded,
         filters,
@@ -76,6 +81,7 @@ export const useFilters = () => {
         selectAge: handleAgeSelect,
         selectGender: handleGenderSelect,
         selectOrder: handleOrderSelect,
+        selectWithPhoto: handleWithPhotoToggle,
         totalCount
     }
 }

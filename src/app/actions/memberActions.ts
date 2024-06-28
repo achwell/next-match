@@ -11,7 +11,8 @@ export async function getMembers({
                                      gender = "male,female",
                                      orderBy = "updated",
                                      pageNumber = "1",
-                                     pageSize = "12"
+                                     pageSize = "12",
+                                     withPhoto = "true"
                                  }: GetMemberParams): Promise<PaginatedResponse<Member>> {
     const userId = await getAuthUserId()
     const [minAge, maxAge] = ageRange.split(",")
@@ -28,7 +29,7 @@ export async function getMembers({
     try {
         const count = await prisma.member.count({
             where: {
-                AND: [{dateOfBirth: {gte: minDob}}, {dateOfBirth: {lte: maxDob}}, {gender: {in: selectedGender}}],
+                AND: [{dateOfBirth: {gte: minDob}}, {dateOfBirth: {lte: maxDob}}, {gender: {in: selectedGender}}, ...(withPhoto === 'true' ? [{image: {not: null}}] : [])],
                 NOT: {
                     userId
                 }
@@ -36,15 +37,15 @@ export async function getMembers({
         })
         const members = await prisma.member.findMany({
             where: {
-                AND: [{dateOfBirth: {gte: minDob}}, {dateOfBirth: {lte: maxDob}}, {gender: {in: selectedGender}}],
+                AND: [{dateOfBirth: {gte: minDob}}, {dateOfBirth: {lte: maxDob}}, {gender: {in: selectedGender}},
+                    ...(withPhoto === 'true' ? [{image: {not: null}}] : [])],
                 NOT: {
                     userId
                 }
             }, orderBy: {[orderBy]: "desc"}, skip, take: limit
         });
         return {
-            items: members,
-            totalCount: count
+            items: members, totalCount: count
         }
     } catch (error) {
         console.log(error);
