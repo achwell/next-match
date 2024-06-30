@@ -27,10 +27,10 @@ export const useFilters = () => {
     const {gender, ageRange, orderBy, withPhoto} = filters
 
     useEffect(() => {
-        if (gender || ageRange || orderBy) {
-            setPage(1)
+        if (gender || ageRange || orderBy || withPhoto) {
+            setPage(1);
         }
-    }, [ageRange, gender, orderBy, setPage]);
+    }, [gender, ageRange, orderBy, setPage, withPhoto])
 
     useEffect(() => {
         startTransition(() => {
@@ -45,7 +45,7 @@ export const useFilters = () => {
 
             router.replace(`${pathname}?${searchParams}`)
         })
-    }, [gender, ageRange, orderBy, router, pathname, pageSize, pageNumber, withPhoto]);
+    }, [ageRange, orderBy, gender, router, pathname, pageNumber, pageSize, withPhoto])
 
     const orderByList = [{label: "Last Active", value: "updated"}, {label: "Newest members", value: "created"}]
     const genderList = [{value: "male", icon: FaMale}, {value: "female", icon: FaFemale}]

@@ -22,9 +22,8 @@ export const useMessages = (initialMessages: MessageDto[], nextCursor?: string) 
     const [loadingMore, setLoadingMore] = useState(false);
 
     useEffect(() => {
-        cursorRef.current = nextCursor
-
         set(initialMessages);
+        cursorRef.current = nextCursor;
 
         return () => {
             resetMessages()

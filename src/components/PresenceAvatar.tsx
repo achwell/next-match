@@ -1,5 +1,5 @@
-import usePresenceStore from "@/hooks/usePresenceStore";
-import {Avatar, Badge} from "@nextui-org/react";
+import usePresenceStore from '@/hooks/usePresenceStore';
+import { Avatar, Badge } from '@nextui-org/react';
 
 interface Props {
     userId?: string;

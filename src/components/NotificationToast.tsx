@@ -1,8 +1,8 @@
-import Link from "next/link";
-import {Image} from "@nextui-org/react";
-import {transformImageUrl} from "@/lib/util";
-import {MessageDto} from "@/types";
-import {toast} from "react-toastify";
+import Link from 'next/link';
+import {Image} from '@nextui-org/react';
+import { transformImageUrl } from '@/lib/util';
+import { MessageDto } from '@/types';
+import { toast } from 'react-toastify';
 
 interface Props {
     image?: string | null;
@@ -11,22 +11,22 @@ interface Props {
     subtitle?: string;
 }
 const NotificationToast = ({image, href, title, subtitle}: Props) => {
-    return (
-        <Link href={href} className='flex items-center'>
-            <div className='mr-2'>
-                <Image
-                    src={transformImageUrl(image) || '/images/user.png'}
-                    height={50}
-                    width={50}
-                    alt='Sender image'
-                />
-            </div>
-            <div className='flex flex-grow flex-col justify-center'>
-                <div className='font-semibold'>{title}</div>
-                <div className='text-sm'>{subtitle || 'Click to view'}</div>
-            </div>
-        </Link>
-    )
+  return (
+    <Link href={href} className='flex items-center'>
+        <div className='mr-2'>
+            <Image
+                src={transformImageUrl(image) || '/images/user.png'}
+                height={50}
+                width={50}
+                alt='Sender image'
+            />
+        </div>
+        <div className='flex flex-grow flex-col justify-center'>
+            <div className='font-semibold'>{title}</div>
+            <div className='text-sm'>{subtitle || 'Click to view'}</div>
+        </div>
+    </Link>
+  )
 }
 export default NotificationToast;
 

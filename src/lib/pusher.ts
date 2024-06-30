@@ -25,6 +25,6 @@ if (!global.pusherClientInstance) {
         cluster: "eu"
     })
 }
+
 export const pusherServer = global.pusherServerInstance;
 export const pusherClient = global.pusherClientInstance;
-

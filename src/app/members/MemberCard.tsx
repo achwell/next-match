@@ -19,6 +19,7 @@ const MemberCard = ({member, likeIds}: Props) => {
         e.preventDefault();
         e.stopPropagation();
     }
+
     return (
         <Card
             fullWidth
@@ -41,6 +42,7 @@ const MemberCard = ({member, likeIds}: Props) => {
                     <PresenceDot member={member} />
                 </div>
             </div>
+
             <CardFooter
                 className='flex justify-start bg-black overflow-hidden absolute bottom-0 z-10 bg-dark-gradient'>
                 <div className='flex flex-col text-white'>

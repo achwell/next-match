@@ -8,13 +8,13 @@ import DeleteButton from './DeleteButton';
 import MemberImage from './MemberImage';
 import StarButton from './StarButton';
 
-type Props = {
+interface Props {
     photos: Photo[] | null;
     editing?: boolean;
     mainImageUrl?: string | null;
 }
 
-export default function MemberPhotos({ photos, editing, mainImageUrl }: Props) {
+const MemberPhotos = ({ photos, editing, mainImageUrl }: Props) => {
     const router = useRouter();
     const [loading, setLoading] = useState({
         type: '',
@@ -70,3 +70,4 @@ export default function MemberPhotos({ photos, editing, mainImageUrl }: Props) {
         </div>
     )
 }
+export default MemberPhotos

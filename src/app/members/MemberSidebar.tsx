@@ -32,6 +32,7 @@ const MemberSidebar = ({member, navLinks}: Props) => {
                     <div>
                         <PresenceDot member={member}/>
                     </div>
+
                     <div className='text-sm text-neutral-500'>
                         {member.city}, {member.country}
                     </div>
